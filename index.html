@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petru's RACE 2026 – Inscripción Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --r:#E8002D; --dark:#0A0A0F; --dark2:#111118; --card:#16161E;
+  --border:rgba(255,255,255,0.08); --text:#F0EEE8;
+  --muted:rgba(240,238,232,0.45); --green:#00E676; --yellow:#FFD600; --blue:#448AFF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* RADIO CARDS */
+.rc{position:relative}
+.rc input[type=radio]{position:absolute;opacity:0;width:0;height:0}
+.rc label{display:block;background:rgba(255,255,255,.03);border:2px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem .8rem;text-align:center;cursor:pointer;transition:.15s;-webkit-user-select:none;user-select:none}
+.rc input[type=radio]:checked ~ label{border-color:#E8002D !important;background:rgba(232,0,45,.1) !important}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(232,0,45,.18),transparent 60%);pointer-events:none}
+.logo-top{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:8px;color:#E8002D;margin-bottom:3rem}
+.pill{background:#E8002D;color:#fff;font-size:.7rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;display:inline-block;margin:.3rem}
+.pill.out{background:transparent;border:1px solid rgba(232,0,45,.5);color:#E8002D}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,13rem);line-height:.88}
+.hero h1 span{color:#E8002D;display:block}
+.hero-sub{color:var(--muted);margin-top:1rem;font-size:1rem}
+.meta-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:2rem}
+.chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.5rem 1.1rem;font-size:.82rem;color:var(--muted)}
+.chip strong{color:var(--text)}
+.btn-hero{background:#E8002D;color:#fff;font-weight:600;font-size:1rem;border:none;padding:1rem 2.8rem;border-radius:8px;cursor:pointer;margin-top:2rem;box-shadow:0 0 40px rgba(232,0,45,.3);transition:.2s}
+.btn-hero:hover{background:#FF1744;transform:translateY(-2px)}
+
+/* INFOBAR */
+.infobar{background:#E8002D;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.ib{padding:1.3rem 1.5rem;border-right:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:.7rem}
+.ib:last-child{border:none}
+.ib-lbl{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:.2rem}
+.ib-val{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#fff;line-height:1.1}
+
+/* SECCIONES */
+section{padding:5rem 1.5rem;position:relative}
+.wrap{max-width:1100px;margin:0 auto}
+.sec-lbl{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#E8002D;margin-bottom:.5rem}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,6vw,4rem);line-height:.95;margin-bottom:2rem}
+
+/* MAPA */
+.map-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}
+@media(max-width:768px){.map-layout{grid-template-columns:1fr}}
+.map-frame{border-radius:12px;overflow:hidden;border:1.5px solid rgba(232,0,45,.3);position:relative}
+.map-lbl{position:absolute;top:.8rem;left:.8rem;background:#E8002D;color:#fff;font-size:.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:.3rem .8rem;border-radius:4px;z-index:2}
+.stop{display:flex;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--border)}
+.stop:last-child{border:none}
+.sdot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:.3rem}
+.stop-name{font-weight:500;font-size:.9rem;margin-bottom:.2rem}
+.stop-desc{font-size:.78rem;color:var(--muted);line-height:1.5}
+.rcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-bottom:.8rem}
+.rcard h4{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+
+/* STEPPER */
+.stepper{display:flex;justify-content:center;margin-bottom:2.5rem;position:relative}
+.stepper::before{content:'';position:absolute;top:20px;left:10%;width:80%;height:1px;background:var(--border)}
+.si{display:flex;flex-direction:column;align-items:center;gap:.4rem;flex:1;max-width:110px;z-index:1;cursor:default}
+.si-circle{width:42px;height:42px;border-radius:50%;border:2px solid var(--border);background:var(--dark2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--muted);transition:.3s}
+.si.active .si-circle{border-color:#E8002D;background:#E8002D;color:#fff;box-shadow:0 0 20px rgba(232,0,45,.4)}
+.si.done .si-circle{border-color:#00E676;background:#00E676;color:#0A0A0F}
+.si-lbl{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center}
+.si.active .si-lbl{color:#E8002D}
+.si.done .si-lbl{color:#00E676}
+@media(max-width:600px){.si-lbl{display:none}}
+
+/* FORM */
+.fcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.5rem}
+@media(max-width:600px){.fcard{padding:1.5rem}}
+.panel{display:none}
+.panel.active{display:block}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media(max-width:600px){.fgrid{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field label{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500}
+.field input,.field select,.field textarea{background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;padding:.8rem 1rem;outline:none;width:100%;-webkit-appearance:none;appearance:none;transition:.2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#E8002D;background:rgba(232,0,45,.04);box-shadow:0 0 0 3px rgba(232,0,45,.1)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(240,238,232,.2)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath fill='%23E8002D' d='M5 7L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
+.field select option{background:#16161E}
+.field textarea{resize:vertical;min-height:75px}
+.req{color:#E8002D}
+.field-note{font-size:.72rem;color:var(--muted);margin-top:.25rem}
+.hdivider{grid-column:1/-1;height:1px;background:var(--border);margin:.4rem 0}
+
+/* FIRMA */
+#canvas-firma{border:1.5px solid var(--border);border-radius:8px;background:rgba(255,255,255,.03);cursor:crosshair;display:block;touch-action:none;width:100%}
+
+/* UPLOAD */
+.uzone{border:2px dashed var(--border);border-radius:10px;padding:2rem;text-align:center;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.uzone:hover{border-color:#E8002D;background:rgba(232,0,45,.03)}
+.uzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.uapproved{display:none;flex-direction:column;align-items:center;gap:.4rem;padding:1.5rem;text-align:center}
+.uapproved-icon{width:52px;height:52px;border-radius:50%;background:rgba(0,230,118,.12);border:2px solid #00E676;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+
+/* ADDONS */
+.addon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.addon{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:12px;padding:1.2rem;cursor:pointer;transition:.2s;position:relative}
+.addon:hover{border-color:rgba(232,0,45,.35)}
+.addon.sel{border-color:#E8002D;background:rgba(232,0,45,.07)}
+.addon-ck{position:absolute;top:.7rem;right:.7rem;width:22px;height:22px;border-radius:50%;background:#E8002D;display:flex;align-items:center;justify-content:center;font-size:.7rem;opacity:0;transition:.2s}
+.addon.sel .addon-ck{opacity:1}
+.addon-ico{font-size:1.8rem;margin-bottom:.5rem}
+.addon-name{font-weight:600;font-size:.88rem;margin-bottom:.2rem}
+.addon-desc{font-size:.73rem;color:var(--muted);line-height:1.5;margin-bottom:.5rem}
+.addon-price{font-family:monospace;color:#E8002D;font-size:.9rem;font-weight:600}
+
+/* RESUMEN */
+.resbox{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-bottom:1.2rem}
+.resrow{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.resrow:last-child{border:none;padding-top:.7rem;font-weight:600;font-size:.95rem}
+.resrow .lbl{color:var(--muted)}
+.resrow .price{font-family:monospace}
+
+/* PAGO */
+.pay-opts{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1.3rem}
+.payopt{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:8px;padding:.65rem 1.2rem;cursor:pointer;transition:.2s;font-size:.85rem}
+.payopt.sel{border-color:#E8002D;background:rgba(232,0,45,.07)}
+.card-prev{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:1.4rem;margin-bottom:1.3rem;position:relative;overflow:hidden}
+.card-chip{width:34px;height:26px;background:linear-gradient(135deg,#d4a843,#f0c050);border-radius:5px;margin-bottom:1rem}
+.card-num-disp{font-family:monospace;font-size:1rem;letter-spacing:3px;margin-bottom:.9rem;color:rgba(255,255,255,.9)}
+.card-bottom{display:flex;justify-content:space-between}
+.card-holder{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.65)}
+.card-exp{font-family:monospace;font-size:.75rem;color:rgba(255,255,255,.65)}
+.cuotas{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1rem 0}
+.cuota{background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:8px;padding:.7rem;text-align:center;cursor:pointer;transition:.2s}
+.cuota.sel,.cuota:hover{border-color:#E8002D;background:rgba(232,0,45,.07)}
+.cuota-n{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#E8002D}
+.cuota-lbl{font-size:.65rem;color:var(--muted)}
+.cuota-val{font-family:monospace;font-size:.75rem;margin-top:.15rem}
+
+/* CHECKS */
+.chkrow{display:flex;align-items:flex-start;gap:.8rem;padding:.7rem 0;border-bottom:1px solid var(--border);cursor:pointer}
+.chkrow:last-child{border:none}
+.chkbox{width:20px;height:20px;border-radius:4px;border:2px solid var(--border);flex-shrink:0;margin-top:.1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.chkbox.on{background:#E8002D;border-color:#E8002D}
+.chktxt{font-size:.83rem;color:var(--muted);line-height:1.5}
+.chktxt a{color:#E8002D;text-decoration:none}
+
+/* NAV */
+.fnav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:.75rem 1.6rem;border-radius:8px;cursor:pointer;transition:.2s}
+.btn-back:hover{border-color:var(--text);color:var(--text)}
+.btn-next{background:#E8002D;color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.95rem;padding:.8rem 2rem;border-radius:8px;border:none;cursor:pointer;transition:.2s;box-shadow:0 4px 20px rgba(232,0,45,.25)}
+.btn-next:hover{background:#FF1744;transform:translateY(-1px)}
+.btn-pay{background:linear-gradient(135deg,#E8002D,#FF4757);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:1rem;padding:.9rem 2.3rem;border-radius:8px;border:none;cursor:pointer;box-shadow:0 4px 30px rgba(232,0,45,.35);transition:.2s}
+.btn-pay:hover{transform:translateY(-2px)}
+.step-info{font-size:.78rem;color:var(--muted)}
+
+/* CONFIRMACION */
+.confirm{display:none;text-align:center}
+.confirm.active{display:block}
+.confirm-icon{width:76px;height:76px;border-radius:50%;background:rgba(0,230,118,.1);border:2px solid #00E676;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.2rem}
+.dorsal-big{display:inline-block;background:#E8002D;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:3.5rem;padding:.4rem 1.8rem;border-radius:8px;letter-spacing:3px;margin:.8rem 0 1.5rem;box-shadow:0 8px 40px rgba(232,0,45,.4)}
+.ficha{display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left;margin-bottom:1.5rem}
+@media(max-width:500px){.ficha{grid-template-columns:1fr}}
+.ficha-item{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:.9rem 1.1rem}
+.ficha-lbl{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.ficha-val{font-weight:500;font-size:.9rem}
+.paid-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.3);color:#00E676;font-weight:600;padding:.45rem 1.1rem;border-radius:100px;font-size:.82rem;margin-bottom:1.5rem}
+.qr-wrap{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:1.8rem;display:inline-block;margin-bottom:1.5rem}
+.qr-title{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+#qr-code{background:#fff;border-radius:6px;padding:10px;display:inline-block}
+.btn-dl{background:var(--card);border:1.5px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:.8rem 1.8rem;border-radius:8px;cursor:pointer;transition:.2s}
+.btn-dl:hover{border-color:#E8002D;color:#E8002D}
+
+/* LISTA */
+.lista-section{background:var(--dark2)}
+#tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border)}
+#tbl-wrap table{width:100%;border-collapse:collapse;font-size:.88rem}
+#tbl-wrap thead{background:#E8002D}
+#tbl-wrap th{padding:.8rem 1.1rem;text-align:left;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#fff;font-weight:600}
+#tbl-wrap tbody tr{border-bottom:1px solid var(--border)}
+#tbl-wrap td{padding:.85rem 1.1rem;color:rgba(240,238,232,.8)}
+.talle-badge{background:rgba(232,0,45,.15);color:#E8002D;font-family:monospace;font-weight:600;font-size:.82rem;padding:.25rem .65rem;border-radius:4px}
+.cat-badge{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:.2rem .55rem;border-radius:4px;font-weight:600}
+.cat-3k{background:rgba(232,0,45,.12);color:#E8002D}
+.cat-kids{background:rgba(0,230,118,.12);color:#00E676}
+.tally{display:flex;flex-wrap:wrap;gap:.5rem;padding:1rem 1.1rem;border-bottom:1px solid var(--border)}
+.tally-chip{background:rgba(255,255,255,.05);font-size:.72rem;padding:.25rem .6rem;border-radius:4px}
+.empty-msg{text-align:center;padding:3rem;color:var(--muted);font-size:.9rem}
+
+/* FOOTER / BTN INSCRIPTOS */
+.sec-inscriptos{background:var(--dark);padding:3rem 1.5rem;text-align:center;border-top:1px solid var(--border)}
+footer{background:var(--dark);border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;color:rgba(240,238,232,.25);font-size:.72rem;letter-spacing:2px;text-transform:uppercase}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:1rem;padding:.85rem 1.4rem;border-radius:8px;font-size:.85rem;font-weight:500;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.175,.885,.32,1.275);z-index:9999;pointer-events:none;max-width:calc(100vw - 2rem)}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:#00E676;color:#0A0A0F}
+.toast.error{background:#E8002D;color:#fff}
+.toast.info{background:#448AFF;color:#fff}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="logo-top">PETRU'S · RACE · 2026</div>
+  <div>
+    <span class="pill">Inscripción Abierta</span>
+    <span class="pill out">Cupos Limitados</span>
+  </div>
+  <h1><span>PETRU'S</span>RACE</h1>
+  <p class="hero-sub">La carrera de la familia · Lago de Regatas, Palermo · Buenos Aires</p>
+  <div class="meta-chips">
+    <div class="chip"><strong>18 de Julio</strong> · 2026</div>
+    <div class="chip">Largada <strong>09:00 hs</strong></div>
+    <div class="chip">3K · Kids 500m</div>
+    <div class="chip">Lago de Regatas · Palermo</div>
+  </div>
+  <button class="btn-hero" onclick="document.getElementById('registro').scrollIntoView({behavior:'smooth'})">Inscribirme ahora →</button>
+</section>
+
+<!-- INFOBAR -->
+<div class="infobar">
+  <div class="ib"><span style="font-size:1.3rem">📅</span><div><div class="ib-lbl">Fecha</div><div class="ib-val">Vie 18 · Jul · 2026</div></div></div>
+  <div class="ib"><span style="font-size:1.3rem">⏰</span><div><div class="ib-lbl">Largada</div><div class="ib-val">09:00 · 3K &nbsp;|&nbsp; 09:30 · Kids</div></div></div>
+  <div class="ib"><span style="font-size:1.3rem">📍</span><div><div class="ib-lbl">Lugar</div><div class="ib-val">Lago de Regatas · Palermo</div></div></div>
+  <div class="ib"><span style="font-size:1.3rem">🏅</span><div><div class="ib-lbl">Incluye</div><div class="ib-val">Remera + Medalla + Chip</div></div></div>
+  <div class="ib"><span style="font-size:1.3rem">👥</span><div><div class="ib-lbl">Cupos</div><div class="ib-val">200 lugares</div></div></div>
+</div>
+
+<!-- MAPA -->
+<section style="background:var(--dark2)" id="recorrido">
+  <div class="wrap">
+    <p class="sec-lbl">El Recorrido</p>
+    <h2 class="sec-title">RUTA OFICIAL</h2>
+    <div class="map-layout">
+      <div>
+        <ul style="list-style:none">
+          <li class="stop"><div class="sdot" style="background:#00E676;box-shadow:0 0 8px rgba(0,230,118,.5)"></div><div><div class="stop-name">🟢 Largada — Lago de Regatas</div><div class="stop-desc">Av. Ernesto Tornquist s/n, Palermo. Concentración desde las 07:30 hs. Acreditación y retiro de kits en expo previa (17/7).</div></div></li>
+          <li class="stop"><div class="sdot" style="background:#FFD600"></div><div><div class="stop-name">💧 Km 1 — Hidratación 1</div><div class="stop-desc">Sobre Av. Andrés Bello. Agua e isotónico. Fotógrafos Lookers. Primeros auxilios.</div></div></li>
+          <li class="stop"><div class="sdot" style="background:#448AFF"></div><div><div class="stop-name">📸 Km 2 — Punto fotográfico</div><div class="stop-desc">Regreso en Av. Tornquist completando primera vuelta. Captura de video highlight. Inicio del tramo final.</div></div></li>
+          <li class="stop"><div class="sdot" style="background:#FFD600"></div><div><div class="stop-name">💧 Km 2.5 — Hidratación 2</div><div class="stop-desc">Sobre Av. De los Ombúes. Agua y fruta. ¡Último tramo!</div></div></li>
+          <li class="stop"><div class="sdot" style="background:#E8002D;box-shadow:0 0 8px rgba(232,0,45,.5)"></div><div><div class="stop-name">🏁 Km 3 — META</div><div class="stop-desc">1 vuelta al lago (~2km) + tramo por Tornquist y Andrés Bello (~1km). Medalla, recuperación y festejo familiar.</div></div></li>
+        </ul>
+        <div class="rcard"><h4>Kids 500m</h4><p style="font-size:.88rem;line-height:1.6">Media vuelta por la senda peatonal del lago. Cerrada al tránsito. Acompañantes pueden correr junto al menor.</p></div>
+        <div class="rcard"><h4>Terreno</h4><p style="font-size:.88rem;line-height:1.6">Sendas peatonales y asfalto interior. Cerrado al tránsito desde las 07:00 hs. Perímetro del lago: <strong>2.000 m</strong>.</p></div>
+      </div>
+      <div class="map-frame" style="background:#0e1a0e">
+        <div class="map-lbl">🗺️ Recorrido oficial · 3K</div>
+        <svg viewBox="0 0 560 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:460px;display:block">
+          <defs>
+            <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#E8002D" opacity=".9"/></marker>
+            <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="560" height="500" fill="#14261a"/>
+          <rect x="28" y="0" width="22" height="500" fill="#1e1e1e" opacity=".9"/>
+          <text x="39" y="250" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="9" font-family="sans-serif" transform="rotate(-90,39,250)">AV. ERNESTO TORNQUIST</text>
+          <rect x="510" y="0" width="22" height="500" fill="#1e1e1e" opacity=".9"/>
+          <text x="521" y="250" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="9" font-family="sans-serif" transform="rotate(90,521,250)">AV. ANDRÉS BELLO</text>
+          <rect x="50" y="18" width="460" height="18" fill="#1e1e1e" opacity=".9"/>
+          <text x="280" y="30" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="9" font-family="sans-serif">AV. DE LOS OMBÚES</text>
+          <rect x="50" y="464" width="460" height="18" fill="#1e1e1e" opacity=".9"/>
+          <text x="280" y="476" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="9" font-family="sans-serif">AV. VALENTÍN ALSINA · PASEO FANGIO</text>
+          <rect x="50" y="36" width="460" height="428" fill="#1a3020" rx="2"/>
+          <path d="M170,58 Q200,46 280,44 Q360,46 390,58 Q420,72 428,120 Q435,180 432,250 Q430,320 425,370 Q415,420 390,438 Q355,452 280,454 Q205,452 170,438 Q145,420 135,370 Q128,320 128,250 Q127,180 132,120 Q140,72 170,58Z" fill="#1a4060" stroke="#2a6090" stroke-width="2"/>
+          <ellipse cx="280" cy="200" rx="95" ry="40" fill="#1e5070" opacity=".3"/>
+          <ellipse cx="280" cy="105" rx="28" ry="16" fill="#2a4a20" stroke="#3a6030" stroke-width="1.5"/>
+          <ellipse cx="280" cy="370" rx="35" ry="20" fill="#2a4a20" stroke="#3a6030" stroke-width="1.5"/>
+          <text x="280" y="248" text-anchor="middle" fill="rgba(100,180,230,.45)" font-size="11" font-family="sans-serif">LAGO DE REGATAS</text>
+          <text x="280" y="263" text-anchor="middle" fill="rgba(100,180,230,.28)" font-size="8" font-family="sans-serif">Perímetro ~2.000 m</text>
+          <path d="M110,420 L68,420 L68,55 L492,55 L492,420 L450,420" fill="none" stroke="#E8002D" stroke-width="4" stroke-dasharray="9,5" opacity=".7" marker-mid="url(#arr)"/>
+          <path d="M450,420 Q440,454 390,464 Q335,472 280,472 Q225,472 170,464 Q120,454 110,420 Q100,385 100,340 Q100,260 102,190 Q106,130 120,90 Q140,58 170,48 Q220,36 280,35 Q340,36 390,48 Q420,58 440,90 Q454,130 458,190 Q460,260 458,340 Q456,385 450,420Z" fill="none" stroke="#E8002D" stroke-width="5" stroke-linecap="round" opacity=".9" marker-mid="url(#arr)"/>
+          <circle cx="110" cy="420" r="16" fill="#00E676" stroke="#fff" stroke-width="2.5" filter="url(#glow)"/>
+          <text x="110" y="425" text-anchor="middle" fill="#000" font-size="9" font-weight="bold" font-family="sans-serif">S/M</text>
+          <rect x="118" y="408" width="132" height="28" rx="5" fill="rgba(0,0,0,.82)" stroke="#00E676" stroke-width="1.2"/>
+          <text x="184" y="420" text-anchor="middle" fill="#00E676" font-size="8" font-weight="600" font-family="sans-serif">🏁 LARGADA y META</text>
+          <text x="184" y="431" text-anchor="middle" fill="rgba(240,238,232,.5)" font-size="7" font-family="sans-serif">Av. Tornquist · 09:00 hs</text>
+          <circle cx="100" cy="230" r="13" fill="#FFD600" stroke="#fff" stroke-width="2"/>
+          <text x="100" y="235" text-anchor="middle" fill="#000" font-size="10" font-family="sans-serif">💧</text>
+          <rect x="108" y="218" width="118" height="26" rx="4" fill="rgba(0,0,0,.82)" stroke="#FFD600" stroke-width="1.2"/>
+          <text x="167" y="229" text-anchor="middle" fill="#FFD600" font-size="7.5" font-weight="600" font-family="sans-serif">Km 1 — Hidratación 1</text>
+          <text x="167" y="239" text-anchor="middle" fill="rgba(240,238,232,.5)" font-size="7" font-family="sans-serif">Agua · Isotónico · Auxilios</text>
+          <circle cx="280" cy="40" r="13" fill="#448AFF" stroke="#fff" stroke-width="2"/>
+          <text x="280" y="45" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif">📸</text>
+          <rect x="195" y="50" width="170" height="26" rx="4" fill="rgba(0,0,0,.82)" stroke="#448AFF" stroke-width="1.2"/>
+          <text x="280" y="61" text-anchor="middle" fill="#448AFF" font-size="7.5" font-weight="600" font-family="sans-serif">Km 2 — Punto fotográfico</text>
+          <text x="280" y="71" text-anchor="middle" fill="rgba(240,238,232,.5)" font-size="7" font-family="sans-serif">Lookers · Video highlight</text>
+          <circle cx="460" cy="280" r="13" fill="#FFD600" stroke="#fff" stroke-width="2"/>
+          <text x="460" y="285" text-anchor="middle" fill="#000" font-size="10" font-family="sans-serif">💧</text>
+          <rect x="332" y="268" width="122" height="26" rx="4" fill="rgba(0,0,0,.82)" stroke="#FFD600" stroke-width="1.2"/>
+          <text x="393" y="279" text-anchor="middle" fill="#FFD600" font-size="7.5" font-weight="600" font-family="sans-serif">Km 2.5 — Hidratación 2</text>
+          <text x="393" y="289" text-anchor="middle" fill="rgba(240,238,232,.5)" font-size="7" font-family="sans-serif">Agua · Fruta · Último km!</text>
+          <rect x="56" y="96" width="155" height="86" rx="7" fill="rgba(8,12,8,.9)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+          <circle cx="74" cy="115" r="5" fill="#00E676"/><text x="85" y="119" fill="#F0EEE8" font-size="8" font-family="sans-serif">Largada / Meta</text>
+          <circle cx="74" cy="133" r="5" fill="#FFD600"/><text x="85" y="137" fill="#F0EEE8" font-size="8" font-family="sans-serif">Hidratación</text>
+          <circle cx="74" cy="151" r="5" fill="#448AFF"/><text x="85" y="155" fill="#F0EEE8" font-size="8" font-family="sans-serif">Punto fotográfico</text>
+          <line x1="62" y1="167" x2="90" y2="167" stroke="#E8002D" stroke-width="3" stroke-dasharray="5,3"/><text x="98" y="171" fill="#F0EEE8" font-size="8" font-family="sans-serif">Recorrido 3K</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRO -->
+<section style="background:var(--dark)" id="registro">
+  <div class="wrap">
+    <p class="sec-lbl">Inscripción Online</p>
+    <h2 class="sec-title">REGISTRATE</h2>
+
+    <!-- STEPPER -->
+    <div class="stepper">
+      <div class="si active" id="si1"><div class="si-circle">1</div><div class="si-lbl">Categoría</div></div>
+      <div class="si" id="si2"><div class="si-circle">2</div><div class="si-lbl">Tus datos</div></div>
+      <div class="si" id="si3"><div class="si-circle">3</div><div class="si-lbl">Documentos</div></div>
+      <div class="si" id="si4"><div class="si-circle">4</div><div class="si-lbl">Extras</div></div>
+      <div class="si" id="si5"><div class="si-circle">5</div><div class="si-lbl">Pago</div></div>
+      <div class="si" id="si6"><div class="si-circle">✓</div><div class="si-lbl">Listo</div></div>
+    </div>
+
+    <div class="fcard">
+
+      <!-- PANEL 1: CATEGORIA -->
+      <div class="panel active" id="panel-1">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:.3rem">ELEGÍ TU CATEGORÍA</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.8rem">Seleccioná una opción en cada sección</p>
+
+        <p style="font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:#E8002D;margin-bottom:.8rem;font-weight:600">1 · Distancia *</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.8rem">
+          <div class="rc">
+            <input type="radio" name="distancia" id="r3k" value="3K">
+            <label for="r3k">
+              <div style="font-size:1.5rem;margin-bottom:.4rem">🏃</div>
+              <div style="font-weight:600;font-size:.9rem;margin-bottom:.2rem">3 Kilómetros</div>
+              <div style="font-size:.68rem;color:var(--muted);letter-spacing:1px;margin-bottom:.35rem">ADULTOS · +16 AÑOS</div>
+              <div style="font-family:monospace;color:#E8002D;font-size:.9rem;font-weight:600">$8.000</div>
+            </label>
+          </div>
+          <div class="rc">
+            <input type="radio" name="distancia" id="rkids" value="Kids 500m">
+            <label for="rkids">
+              <div style="font-size:1.5rem;margin-bottom:.4rem">🧒</div>
+              <div style="font-weight:600;font-size:.9rem;margin-bottom:.2rem">Kids 500m</div>
+              <div style="font-size:.68rem;color:var(--muted);letter-spacing:1px;margin-bottom:.35rem">MENORES · 5 A 15 AÑOS</div>
+              <div style="font-family:monospace;color:#E8002D;font-size:.9rem;font-weight:600">$3.500</div>
+            </label>
+          </div>
+        </div>
+
+        <p style="font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:#E8002D;margin-bottom:.8rem;font-weight:600">2 · Modalidad *</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.8rem">
+          <div class="rc"><input type="radio" name="modalidad" id="mconv" value="Convencional"><label for="mconv"><div style="font-size:1.3rem;margin-bottom:.3rem">🏃‍♀️</div><div style="font-weight:600;font-size:.85rem;margin-bottom:.15rem">Convencional</div><div style="font-size:.68rem;color:var(--muted)">GENERAL</div></label></div>
+          <div class="rc"><input type="radio" name="modalidad" id="msilla" value="Silla de Ruedas"><label for="msilla"><div style="font-size:1.3rem;margin-bottom:.3rem">♿</div><div style="font-weight:600;font-size:.85rem;margin-bottom:.15rem">Silla de Ruedas</div><div style="font-size:.68rem;color:var(--muted)">HANDCYCLE / PUSH</div></label></div>
+          <div class="rc"><input type="radio" name="modalidad" id="mvisual" value="Disminución Visual"><label for="mvisual"><div style="font-size:1.3rem;margin-bottom:.3rem">👓</div><div style="font-weight:600;font-size:.85rem;margin-bottom:.15rem">Disminución Visual</div><div style="font-size:.68rem;color:var(--muted)">CON GUÍA</div></label></div>
+          <div class="rc"><input type="radio" name="modalidad" id="motra" value="Otras Discapacidades"><label for="motra"><div style="font-size:1.3rem;margin-bottom:.3rem">💪</div><div style="font-weight:600;font-size:.85rem;margin-bottom:.15rem">Otras Discapacidades</div><div style="font-size:.68rem;color:var(--muted)">CONSULTAR</div></label></div>
+        </div>
+
+        <p style="font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:#E8002D;margin-bottom:.8rem;font-weight:600">3 · Corral</p>
+        <div style="background:rgba(232,0,45,.08);border:2px solid #E8002D;border-radius:10px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#E8002D">A</div>
+          <div>
+            <div style="font-weight:600;margin-bottom:.25rem">Corral Único — General &nbsp;<span style="background:#00E676;color:#000;font-size:.58rem;font-weight:700;padding:.15rem .5rem;border-radius:3px">ASIGNADO ✓</span></div>
+            <div style="font-size:.78rem;color:var(--muted)">Todos los participantes largan juntos · Chip de cronometraje</div>
+          </div>
+        </div>
+
+        <div class="fnav">
+          <span class="step-info">Paso 1 de 5</span>
+          <button class="btn-next" id="btn-paso1">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 2: DATOS -->
+      <div class="panel" id="panel-2">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:.3rem">TUS DATOS PERSONALES</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Completá con tus datos reales tal como figuran en tu documento</p>
+        <div class="fgrid">
+          <div class="field"><label>Nombre <span class="req">*</span></label><input type="text" id="f-nombre" placeholder="Ej: María"></div>
+          <div class="field"><label>Apellido <span class="req">*</span></label><input type="text" id="f-apellido" placeholder="Ej: González"></div>
+          <div class="field"><label>Tipo de documento <span class="req">*</span></label><select id="f-tipdoc"><option value="">— Seleccioná —</option><option>DNI</option><option>Pasaporte</option><option>CUIL</option></select></div>
+          <div class="field"><label>Número de documento <span class="req">*</span></label><input type="text" id="f-nrodoc" placeholder="Ej: 38.450.123"></div>
+          <div class="field"><label>Fecha de nacimiento <span class="req">*</span></label><input type="date" id="f-fnac"></div>
+          <div class="field"><label>Sexo <span class="req">*</span></label><select id="f-sexo"><option value="">— Seleccioná —</option><option>Femenino</option><option>Masculino</option><option>No binario</option><option>Prefiero no decir</option></select></div>
+          <div class="field"><label>Talle de remera <span class="req">*</span></label><select id="f-talle"><option value="">— Seleccioná —</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+          <div class="field"><label>Grupo sanguíneo</label><select id="f-sangre"><option value="">— Seleccioná —</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>0+</option><option>0-</option></select></div>
+          <div class="field"><label>Teléfono móvil <span class="req">*</span></label><input type="tel" id="f-tel" placeholder="+54 9 11 1234-5678"></div>
+          <div class="field"><label>E-mail <span class="req">*</span></label><input type="email" id="f-email" placeholder="tu@correo.com"></div>
+          <div class="field"><label>País</label><select id="f-pais"><option>Argentina</option><option>Uruguay</option><option>Chile</option><option>Brasil</option><option>Otro</option></select></div>
+          <div class="field"><label>Provincia</label><input type="text" id="f-prov" placeholder="Ej: Buenos Aires"></div>
+          <div class="field"><label>Ciudad</label><input type="text" id="f-ciudad" placeholder="Ej: CABA"></div>
+          <div class="field"><label>Código postal</label><input type="text" id="f-cp" placeholder="Ej: C1425"></div>
+          <div class="field full"><label>¿Tomás alguna medicación habitual?</label><textarea id="f-meds" placeholder="Listá medicamentos o escribí 'Ninguna'"></textarea></div>
+          <div class="field full"><label>¿Alergias conocidas?</label><input type="text" id="f-alergias" placeholder="Ej: Polen, Ibuprofeno · o escribí 'Ninguna'"></div>
+          <div class="hdivider"></div>
+          <div class="field full"><label style="color:#E8002D;font-size:.75rem">CONTACTO DE EMERGENCIA</label></div>
+          <div class="field"><label>Nombre y apellido <span class="req">*</span></label><input type="text" id="f-emnom" placeholder="Ej: Carlos González"></div>
+          <div class="field"><label>Relación</label><select id="f-emrel"><option value="">— Seleccioná —</option><option>Pareja</option><option>Padre / Madre</option><option>Hijo/a</option><option>Hermano/a</option><option>Amigo/a</option><option>Otro</option></select></div>
+          <div class="field"><label>Teléfono <span class="req">*</span></label><input type="tel" id="f-emtel" placeholder="+54 9 11 0000-0000"></div>
+          <div class="field"><label>¿Sabe que participás?</label><select id="f-emsabe"><option>Sí, está al tanto</option><option>No lo sabe aún</option></select></div>
+          <div class="hdivider"></div>
+          <div class="field full">
+            <label>Firma digital <span class="req">*</span></label>
+            <canvas id="canvas-firma" height="120"></canvas>
+            <div style="display:flex;gap:.8rem;margin-top:.5rem">
+              <button type="button" onclick="limpiarFirma()" style="background:transparent;border:1.5px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:.45rem .9rem;border-radius:6px;cursor:pointer">✕ Limpiar</button>
+              <span style="font-size:.73rem;color:var(--muted);align-self:center">Dibujá con el dedo o mouse</span>
+            </div>
+          </div>
+        </div>
+        <div class="fnav">
+          <button class="btn-back" id="btn-back2">← Atrás</button>
+          <div style="display:flex;align-items:center;gap:1.2rem"><span class="step-info">Paso 2 de 5</span><button class="btn-next" id="btn-paso2">Continuar →</button></div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: DOCUMENTOS -->
+      <div class="panel" id="panel-3">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:.3rem">DOCUMENTACIÓN</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Cargá los archivos requeridos. Se validan automáticamente.</p>
+        <div style="margin-bottom:1.8rem">
+          <label style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.7rem">Certificado / Apto Médico <span class="req">*</span></label>
+          <div class="uzone" id="zone-apto"><input type="file" accept=".pdf,.jpg,.jpeg,.png" onchange="aprobarDoc('zone-apto','aprov-apto')"><div style="font-size:1.8rem;margin-bottom:.5rem">🩺</div><div style="font-size:.85rem;color:var(--muted)"><strong>Apto Médico / Certificado de Salud</strong><br>Arrastrá o tocá · PDF, JPG, PNG · Máx 5 MB</div></div>
+          <div class="uapproved" id="aprov-apto"><div class="uapproved-icon">✓</div><div style="color:#00E676;font-weight:600;margin-top:.4rem">✅ Apto Médico Aprobado</div><div style="font-size:.75rem;color:var(--muted)">Documento validado · Estado: VIGENTE</div></div>
+          <p class="field-note">⚠️ Sin apto médico no podrás retirar tu dorsal ni remera el día del evento.</p>
+        </div>
+        <div style="margin-bottom:1.8rem">
+          <label style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.7rem">Foto del DNI (frente) <span class="req">*</span></label>
+          <div class="uzone" id="zone-dni"><input type="file" accept=".jpg,.jpeg,.png,.pdf" onchange="aprobarDoc('zone-dni','aprov-dni')"><div style="font-size:1.8rem;margin-bottom:.5rem">🪪</div><div style="font-size:.85rem;color:var(--muted)"><strong>DNI o documento de identidad</strong><br>Frente visible · JPG, PNG, PDF</div></div>
+          <div class="uapproved" id="aprov-dni"><div class="uapproved-icon">✓</div><div style="color:#00E676;font-weight:600;margin-top:.4rem">✅ Identidad Verificada</div><div style="font-size:.75rem;color:var(--muted)">Documento validado · Estado: APROBADO</div></div>
+        </div>
+        <div style="background:rgba(255,214,0,.05);border:1px solid rgba(255,214,0,.2);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem">
+          <p style="font-size:.75rem;color:#FFD600;font-weight:600;margin-bottom:.8rem">📋 SOLO PARA KIDS 500m — Datos del menor</p>
+          <div class="fgrid">
+            <div class="field"><label>Nombre del menor</label><input type="text" id="f-kidnom" placeholder="Ej: Tomás"></div>
+            <div class="field"><label>Apellido</label><input type="text" id="f-kidade" placeholder="Ej: González"></div>
+            <div class="field"><label>Fecha de nacimiento</label><input type="date" id="f-kidfnac"></div>
+            <div class="field"><label>DNI del menor</label><input type="text" id="f-kiddoc" placeholder="DNI del menor"></div>
+            <div class="field"><label>Talle remera (menor)</label><select id="f-kidtalle"><option value="">— Talle —</option><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option><option>12</option><option>14</option></select></div>
+          </div>
+        </div>
+        <div class="fnav">
+          <button class="btn-back" id="btn-back3">← Atrás</button>
+          <div style="display:flex;align-items:center;gap:1.2rem"><span class="step-info">Paso 3 de 5</span><button class="btn-next" id="btn-paso3">Continuar →</button></div>
+        </div>
+      </div>
+
+      <!-- PANEL 4: ADDONS -->
+      <div class="panel" id="panel-4">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:.3rem">MEJORÁ TU EXPERIENCIA</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Opcionales — el total se actualiza automáticamente</p>
+        <div class="addon-grid">
+          <div class="addon" id="add0" onclick="toggleAddon(0,'📸 Pack Fotos Lookers',3500)"><div class="addon-ck">✓</div><div class="addon-ico">📸</div><div class="addon-name">Pack Fotos Lookers</div><div class="addon-desc">Fotógrafos en 3 puntos del recorrido. Acceso digital en 48 hs.</div><div class="addon-price">+ $3.500</div></div>
+          <div class="addon" id="add1" onclick="toggleAddon(1,'🎥 Video Highlight',4500)"><div class="addon-ck">✓</div><div class="addon-ico">🎥</div><div class="addon-name">Video Highlight</div><div class="addon-desc">Video personalizado de 60 seg. Entregado en 72 hs.</div><div class="addon-price">+ $4.500</div></div>
+          <div class="addon" id="add2" onclick="toggleAddon(2,'👕 Kit Premium',2500)"><div class="addon-ck">✓</div><div class="addon-ico">👕</div><div class="addon-name">Kit en Carrera Premium</div><div class="addon-desc">Gel energético + gorra + medias de compresión + botella.</div><div class="addon-price">+ $2.500</div></div>
+          <div class="addon" id="add3" onclick="toggleAddon(3,'🏅 Medalla Personalizada',2000)"><div class="addon-ck">✓</div><div class="addon-ico">🏅</div><div class="addon-name">Medalla Personalizada</div><div class="addon-desc">Con tu nombre grabado láser. Diseño exclusivo 2026.</div><div class="addon-price">+ $2.000</div></div>
+          <div class="addon" id="add4" onclick="toggleAddon(4,'🍌 Pack Recuperación',1200)"><div class="addon-ck">✓</div><div class="addon-ico">🍌</div><div class="addon-name">Pack Recuperación</div><div class="addon-desc">Banana + barra energética + isotónico post-carrera.</div><div class="addon-price">+ $1.200</div></div>
+          <div class="addon" id="add5" onclick="toggleAddon(5,'🎽 Remera Extra',2800)"><div class="addon-ck">✓</div><div class="addon-ico">🎽</div><div class="addon-name">Remera Extra (Acompañante)</div><div class="addon-desc">Remera técnica adicional para tu acompañante.</div><div class="addon-price">+ $2.800</div></div>
+          <div class="addon" id="add6" onclick="toggleAddon(6,'📦 Bolsa Campeón',9900)"><div class="addon-ck">✓</div><div class="addon-ico">📦</div><div class="addon-name">Bolsa Campeón</div><div class="addon-desc">Fotos + Video + Kit Premium + Medalla + Pack Recuperación.</div><div class="addon-price">+ $9.900</div></div>
+          <div class="addon" id="add7" onclick="toggleAddon(7,'🔢 Dorsal a Elección',800)"><div class="addon-ck">✓</div><div class="addon-ico">🔢</div><div class="addon-name">Dorsal a Elección</div><div class="addon-desc">Elegí tu número favorito (sujeto a disponibilidad).</div><div class="addon-price">+ $800</div></div>
+        </div>
+        <div class="resbox" style="margin-top:1.5rem">
+          <div class="resrow"><span class="lbl">Inscripción base</span><span class="price" id="res-base">$0</span></div>
+          <div id="res-addon-rows"></div>
+          <div class="resrow"><span>TOTAL PROVISORIO</span><span class="price" id="res-total">$0</span></div>
+        </div>
+        <div class="fnav">
+          <button class="btn-back" id="btn-back4">← Atrás</button>
+          <div style="display:flex;align-items:center;gap:1.2rem"><span class="step-info">Paso 4 de 5</span><button class="btn-next" id="btn-paso4">Continuar →</button></div>
+        </div>
+      </div>
+
+      <!-- PANEL 5: PAGO -->
+      <div class="panel" id="panel-5">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:.3rem">TÉRMINOS Y PAGO</h3>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.3rem">Leé y aceptá los términos antes de proceder al pago</p>
+        <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;padding:1.1rem;margin-bottom:1.3rem;max-height:140px;overflow-y:auto;font-size:.78rem;color:var(--muted);line-height:1.7">
+          <strong style="color:var(--text);display:block;margin-bottom:.4rem">REGLAMENTO — PETRU'S RACE 2026</strong>
+          Art. 1 — La inscripción es personal e intransferible. No se realizarán reintegros una vez efectuado el pago. Art. 2 — El participante declara estar en condiciones físicas aptas y poseer certificado médico vigente. Art. 3 — La organización no se responsabiliza por lesiones, robos o daños durante el evento. Art. 4 — El participante autoriza el uso de su imagen para difusión oficial sin fines de lucro. Art. 5 — El retiro del kit es obligatorio antes del evento. Art. 6 — La organización puede modificar el recorrido o fecha por causas de fuerza mayor. Art. 7 — Los datos personales son tratados conforme a la Ley 25.326. Art. 8 — Participar implica la aceptación total de este reglamento.
+        </div>
+        <div style="margin-bottom:1.3rem">
+          <div class="chkrow" onclick="toggleChk('chk1')"><div class="chkbox" id="chk1"></div><div class="chktxt">He leído y acepto el <a href="#">Reglamento y Deslinde de Responsabilidades</a> <span class="req">*</span></div></div>
+          <div class="chkrow" onclick="toggleChk('chk2')"><div class="chkbox" id="chk2"></div><div class="chktxt">Acepto la <a href="#">Política de Privacidad</a> (Ley 25.326) <span class="req">*</span></div></div>
+          <div class="chkrow" onclick="toggleChk('chk3')"><div class="chkbox" id="chk3"></div><div class="chktxt">Declaro estar en condiciones físicas aptas y tener apto médico vigente <span class="req">*</span></div></div>
+          <div class="chkrow" onclick="toggleChk('chk4')"><div class="chkbox" id="chk4"></div><div class="chktxt">Autorizo el uso de mi imagen en fotos y videos del evento para difusión oficial</div></div>
+        </div>
+        <div class="resbox" id="pago-resumen">
+          <div class="resrow"><span class="lbl">Categoría</span><span id="pr-cat" style="font-size:.82rem">—</span></div>
+          <div class="resrow"><span class="lbl">Inscripción base</span><span class="price" id="pr-base">$0</span></div>
+          <div id="pr-addon-rows"></div>
+          <div class="resrow"><span class="lbl">Descuento cupón</span><span class="price" id="pr-desc" style="color:#00E676">$0</span></div>
+          <div class="resrow"><span>TOTAL A PAGAR</span><span class="price" id="pr-total" style="color:#E8002D">$0</span></div>
+        </div>
+        <div style="display:flex;gap:.8rem;margin-bottom:1.3rem;align-items:flex-end;flex-wrap:wrap">
+          <div class="field" style="flex:1;min-width:180px"><label>Cupón de descuento</label><input type="text" id="cupon" placeholder="Ej: FAMILIA10 · PETRU20"></div>
+          <button type="button" onclick="aplicarCupon()" style="background:var(--card);border:1.5px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:.8rem 1.2rem;border-radius:8px;cursor:pointer;white-space:nowrap;transition:.2s;margin-bottom:0">Aplicar</button>
+        </div>
+        <label style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.7rem">Forma de pago <span class="req">*</span></label>
+        <div class="pay-opts">
+          <div class="payopt sel" id="po-tarjeta" onclick="selPay('tarjeta')">💳 Tarjeta</div>
+          <div class="payopt" id="po-mp" onclick="selPay('mp')">🟦 Mercado Pago</div>
+          <div class="payopt" id="po-efectivo" onclick="selPay('efectivo')">💵 Efectivo</div>
+        </div>
+        <div id="pp-tarjeta">
+          <div class="card-prev">
+            <div class="card-chip"></div>
+            <div class="card-num-disp" id="crd-num">•••• •••• •••• ••••</div>
+            <div class="card-bottom"><div class="card-holder" id="crd-name">TU NOMBRE</div><div class="card-exp" id="crd-exp">MM/AA</div></div>
+          </div>
+          <div class="fgrid">
+            <div class="field full"><label>Número de tarjeta <span class="req">*</span></label><input type="text" id="card-num" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"></div>
+            <div class="field full"><label>Titular <span class="req">*</span></label><input type="text" id="card-name" placeholder="NOMBRE APELLIDO" oninput="document.getElementById('crd-name').textContent=this.value.toUpperCase()||'TU NOMBRE'"></div>
+            <div class="field"><label>Vencimiento <span class="req">*</span></label><input type="text" id="card-exp" placeholder="MM/AA" maxlength="5" oninput="fmtExp(this)"></div>
+            <div class="field"><label>CVV <span class="req">*</span></label><input type="text" id="card-cvv" placeholder="•••" maxlength="4"></div>
+          </div>
+          <label style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin:1.1rem 0 .6rem">Plan de cuotas</label>
+          <div class="cuotas">
+            <div class="cuota sel" id="cuota1" onclick="selCuota(1)"><div class="cuota-n">1</div><div class="cuota-lbl">cuota</div><div class="cuota-val" id="cv1">$0</div></div>
+            <div class="cuota" id="cuota3" onclick="selCuota(3)"><div class="cuota-n">3</div><div class="cuota-lbl">cuotas</div><div class="cuota-val" id="cv3">$0/mes</div></div>
+            <div class="cuota" id="cuota6" onclick="selCuota(6)"><div class="cuota-n">6</div><div class="cuota-lbl">cuotas</div><div class="cuota-val" id="cv6">$0/mes</div></div>
+          </div>
+        </div>
+        <div id="pp-mp" style="display:none;background:rgba(68,138,255,.06);border:1px solid rgba(68,138,255,.2);border-radius:10px;padding:1.1rem;margin-top:.6rem"><p style="font-size:.88rem">🟦 Serás redirigido a <strong>Mercado Pago</strong> para completar el pago de forma segura.</p></div>
+        <div id="pp-efectivo" style="display:none;background:rgba(255,214,0,.05);border:1px solid rgba(255,214,0,.15);border-radius:10px;padding:1.1rem;margin-top:.6rem"><p style="font-size:.88rem">💵 Pago presencial en efectivo en el retiro de kits (17/7). <strong style="color:#FFD600">⚠️ Tu lugar queda reservado por 48 hs.</strong></p></div>
+        <div class="fnav" style="flex-direction:column;align-items:stretch">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+            <button class="btn-back" id="btn-back5">← Atrás</button>
+            <button class="btn-pay" id="btn-pagar">🔒 Confirmar y Pagar →</button>
+          </div>
+          <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:.8rem">🔒 Simulación · No se realizan cobros reales · Datos encriptados SSL</p>
+        </div>
+      </div>
+
+      <!-- CONFIRMACION -->
+      <div class="confirm" id="panel-confirm">
+        <div class="confirm-icon">🏆</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#00E676;margin-bottom:.4rem">¡ESTÁS INSCRIPTO!</h2>
+        <p style="color:var(--muted);margin-bottom:1.2rem">Tu inscripción a la <strong>Petru's RACE 2026</strong> fue registrada con éxito</p>
+        <div class="paid-badge">✓ Estado del pago: PAGADO</div>
+        <div><p style="font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">TU NÚMERO DE DORSAL</p><div class="dorsal-big" id="dorsal-display">#042</div></div>
+        <div class="ficha" id="ficha-datos" style="margin-top:1.2rem"></div>
+        <div style="background:var(--card);border:1px solid rgba(232,0,45,.2);border-radius:12px;padding:1.1rem 1.3rem;text-align:left;margin-bottom:1.3rem">
+          <div style="font-weight:600;margin-bottom:.4rem;font-size:.88rem">📦 ¿Qué incluye tu kit?</div>
+          <div style="font-size:.8rem;color:var(--muted);line-height:2.1" id="kit-list">✓ Remera técnica oficial Petru's RACE 2026<br>✓ Dorsal con chip de cronometraje<br>✓ Medalla finisher<br>✓ Bolsa del corredor</div>
+        </div>
+        <div class="qr-wrap">
+          <div class="qr-title">QR DE ACREDITACIÓN — RETIRO DE KIT</div>
+          <div id="qr-code"></div>
+          <p style="font-size:.73rem;color:var(--muted);margin-top:.8rem;max-width:200px;margin-left:auto;margin-right:auto">Presentá este QR el día del evento o en la expo previa (17/7)</p>
+        </div>
+        <br>
+        <button class="btn-dl" onclick="toast('Comprobante descargado','success')">⬇ Descargar comprobante</button>
+        <p style="font-size:.73rem;color:var(--muted);margin-top:1rem">Confirmación enviada a tu e-mail · Consultas: <strong style="color:var(--text)">info@petrurace.com.ar</strong></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIPTOS -->
+<section class="lista-section" id="inscriptos">
+  <div class="wrap">
+    <p class="sec-lbl">Participantes</p>
+    <h2 class="sec-title">FAMILIA EN<br>CARRERA</h2>
+    <p id="empty-msg" class="empty-msg">Todavía no hay inscriptos. ¡Sé el primero! 🏃</p>
+    <div id="tbl-wrap" style="display:none">
+      <div class="tally" id="tally"></div>
+      <table><thead><tr><th>#</th><th>Nombre</th><th>Apellido</th><th>Talle</th><th>Categoría</th></tr></thead><tbody id="tbl-body"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- BOTON INSCRIPTOS -->
+<div class="sec-inscriptos">
+  <p class="sec-lbl">Organización</p>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:.5rem">VER INSCRIPTOS Y TALLES</h2>
+  <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.3rem">Listado completo para gestión de remeras y kits</p>
+  <button onclick="document.getElementById('inscriptos').scrollIntoView({behavior:'smooth'})" style="background:transparent;border:2px solid #E8002D;color:#E8002D;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.95rem;padding:.85rem 2.2rem;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.background='#E8002D';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#E8002D'">👟 Ver listado de inscriptos →</button>
+</div>
+
+<footer>⚡ Petru's RACE 2026 &nbsp;·&nbsp; Lago de Regatas · Palermo · Buenos Aires<br><span style="margin-top:.3rem;display:block">info@petrurace.com.ar &nbsp;·&nbsp; IG: @petrurace</span></footer>
+
+<div class="toast" id="toast-el"></div>
+
+<script>
+// ── CONFIG ──
+var SHEETS = 'https://script.google.com/macros/s/AKfycbzkaTvx_3qiwigXPXpSwyo6PdbpiT0BMELdyQ_-8MnT0ALjZePRVIDXnOM41H68-rjU/exec';
+
+// ── STATE ──
+var st = {
+  step:1, dist:'', modal:'', basePrice:0,
+  addons:[], addonTotal:0, descuento:0, total:0,
+  payMethod:'tarjeta', cuotas:1,
+  runners:[], dorsalN:40
+};
+
+// ── TOAST ──
+function toast(msg, type) {
+  var el = document.getElementById('toast-el');
+  el.textContent = msg;
+  el.className = 'toast ' + (type||'info') + ' show';
+  setTimeout(function(){ el.classList.remove('show'); }, 3500);
+}
+
+// ── STEPPER ──
+function goPanel(n) {
+  for (var i = 1; i <= 6; i++) {
+    var p = document.getElementById('panel-' + i);
+    if (p) p.classList.remove('active');
+    var s = document.getElementById('si' + i);
+    if (s) { s.classList.remove('active','done'); if (i < n) s.classList.add('done'); else if (i === n) s.classList.add('active'); }
+  }
+  var pc = document.getElementById('panel-confirm');
+  if (pc) pc.classList.remove('active');
+  if (n <= 5) {
+    document.getElementById('panel-' + n).classList.add('active');
+  } else {
+    pc.classList.add('active');
+  }
+  st.step = n;
+  document.getElementById('registro').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── FIRMA ──
+var cvs, ctx, drawing = false;
+window.addEventListener('load', function() {
+  cvs = document.getElementById('canvas-firma');
+  if (!cvs) return;
+  ctx = cvs.getContext('2d');
+  cvs.width = cvs.offsetWidth || 500;
+  cvs.height = 120;
+  ctx.strokeStyle = '#F0EEE8'; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  function pos(e) { var r = cvs.getBoundingClientRect(), s = e.touches ? e.touches[0] : e; return {x: s.clientX - r.left, y: s.clientY - r.top}; }
+  cvs.addEventListener('mousedown', function(e){ drawing=true; var p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+  cvs.addEventListener('mousemove', function(e){ if(!drawing) return; var p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
+  cvs.addEventListener('mouseup', function(){ drawing=false; });
+  cvs.addEventListener('touchstart', function(e){ e.preventDefault(); drawing=true; var p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); },{passive:false});
+  cvs.addEventListener('touchmove', function(e){ e.preventDefault(); if(!drawing) return; var p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); },{passive:false});
+  cvs.addEventListener('touchend', function(){ drawing=false; });
+
+  // Cargar inscriptos
+  cargarSheets();
+  setInterval(cargarSheets, 30000);
+});
+
+function limpiarFirma() { if(ctx) ctx.clearRect(0,0,cvs.width,cvs.height); }
+
+// ── DOCS ──
+function aprobarDoc(zoneId, aprovId) {
+  setTimeout(function(){
+    document.getElementById(zoneId).style.display = 'none';
+    document.getElementById(aprovId).style.display = 'flex';
+    toast('✅ Documento aprobado', 'success');
+  }, 800);
+}
+
+// ── ADDONS ──
+var addonSel = [false,false,false,false,false,false,false,false];
+var addonData = [
+  {n:'📸 Pack Fotos Lookers',p:3500},{n:'🎥 Video Highlight',p:4500},{n:'👕 Kit Premium',p:2500},
+  {n:'🏅 Medalla Personalizada',p:2000},{n:'🍌 Pack Recuperación',p:1200},{n:'🎽 Remera Extra',p:2800},
+  {n:'📦 Bolsa Campeón',p:9900},{n:'🔢 Dorsal a Elección',p:800}
+];
+function toggleAddon(i, name, price) {
+  addonSel[i] = !addonSel[i];
+  document.getElementById('add'+i).classList.toggle('sel');
+  st.addons = []; st.addonTotal = 0;
+  for (var j=0; j<addonSel.length; j++) { if(addonSel[j]){ st.addons.push(addonData[j]); st.addonTotal += addonData[j].p; } }
+  actuResumen();
+}
+function actuResumen() {
+  var t = st.basePrice + st.addonTotal - st.descuento;
+  st.total = t;
+  document.getElementById('res-base').textContent = '$' + st.basePrice.toLocaleString('es-AR');
+  document.getElementById('res-total').textContent = '$' + t.toLocaleString('es-AR');
+  var rows = '';
+  for (var i=0; i<st.addons.length; i++) rows += '<div class="resrow"><span class="lbl">'+st.addons[i].n+'</span><span class="price">+$'+st.addons[i].p.toLocaleString('es-AR')+'</span></div>';
+  document.getElementById('res-addon-rows').innerHTML = rows;
+}
+
+// ── CUPON ──
+function aplicarCupon() {
+  var c = document.getElementById('cupon').value.trim().toUpperCase();
+  var codes = {FAMILIA10:10, PETRU20:20, PETRURACE:15, CARRERA2026:10};
+  if (codes[c]) {
+    st.descuento = Math.round((st.basePrice + st.addonTotal) * codes[c] / 100);
+    actuPayResumen();
+    toast('🎉 Cupón aplicado: ' + codes[c] + '% de descuento', 'success');
+  } else {
+    toast('Cupón no válido', 'error');
+  }
+}
+
+// ── PAGO ──
+function actuPayResumen() {
+  var t = Math.max(0, st.basePrice + st.addonTotal - st.descuento);
+  st.total = t;
+  document.getElementById('pr-cat').textContent = st.dist + ' · ' + st.modal;
+  document.getElementById('pr-base').textContent = '$' + st.basePrice.toLocaleString('es-AR');
+  document.getElementById('pr-desc').textContent = st.descuento > 0 ? '-$' + st.descuento.toLocaleString('es-AR') : '$0';
+  document.getElementById('pr-total').textContent = '$' + t.toLocaleString('es-AR');
+  var rows = '';
+  for (var i=0; i<st.addons.length; i++) rows += '<div class="resrow"><span class="lbl">'+st.addons[i].n+'</span><span class="price">+$'+st.addons[i].p.toLocaleString('es-AR')+'</span></div>';
+  document.getElementById('pr-addon-rows').innerHTML = rows;
+  document.getElementById('cv1').textContent = '$' + t.toLocaleString('es-AR');
+  document.getElementById('cv3').textContent = '$' + Math.ceil(t/3).toLocaleString('es-AR') + '/mes';
+  document.getElementById('cv6').textContent = '$' + Math.ceil(t/6).toLocaleString('es-AR') + '/mes';
+}
+function selPay(m) {
+  st.payMethod = m;
+  ['tarjeta','mp','efectivo'].forEach(function(x){
+    document.getElementById('po-'+x).classList.remove('sel');
+    document.getElementById('pp-'+x).style.display='none';
+  });
+  document.getElementById('po-'+m).classList.add('sel');
+  document.getElementById('pp-'+m).style.display='block';
+}
+function selCuota(n) {
+  st.cuotas = n;
+  ['cuota1','cuota3','cuota6'].forEach(function(id){ document.getElementById(id).classList.remove('sel'); });
+  document.getElementById('cuota'+n).classList.add('sel');
+}
+function fmtCard(el) { var v=el.value.replace(/\D/g,'').slice(0,16); el.value=v.match(/.{1,4}/g)?v.match(/.{1,4}/g).join(' '):v; document.getElementById('crd-num').textContent=el.value||'•••• •••• •••• ••••'; }
+function fmtExp(el) { var v=el.value.replace(/\D/g,''); if(v.length>2) v=v.slice(0,2)+'/'+v.slice(2,4); el.value=v; document.getElementById('crd-exp').textContent=v||'MM/AA'; }
+function toggleChk(id) { document.getElementById(id).classList.toggle('on'); }
+
+// ── SHEETS ──
+function enviarSheets(data) {
+  fetch(SHEETS, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)}).catch(function(e){ console.warn('Sheets error:',e); });
+}
+function cargarSheets() {
+  fetch(SHEETS + '?t=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if (!j.data) return;
+      st.runners = j.data.filter(function(r){ return r.Nombre; }).map(function(r){
+        return {dorsal:r.Dorsal||'?', nombre:r.Nombre||'', apellido:r.Apellido||'', talle:r.Talle||'', dist:r.Categoria||''};
+      });
+      var maxD = 40;
+      st.runners.forEach(function(r){ var n=parseInt(r.dorsal); if(!isNaN(n)&&n>maxD) maxD=n; });
+      st.dorsalN = maxD;
+      renderRunners();
+    })
+    .catch(function(e){ console.warn('Sheets read error:',e); });
+}
+
+// ── CONFIRMACION ──
+function mostrarConfirm() {
+  st.dorsalN++;
+  var dorsal = String(st.dorsalN).padStart(3,'0');
+  var nombre = document.getElementById('f-nombre').value;
+  var apellido = document.getElementById('f-apellido').value;
+  var talle = document.getElementById('f-talle').value;
+  var email = document.getElementById('f-email').value;
+
+  enviarSheets({dorsal:dorsal, nombre:nombre, apellido:apellido, talle:talle, categoria:st.dist, modalidad:st.modal});
+
+  document.getElementById('dorsal-display').textContent = '#' + dorsal;
+  document.getElementById('ficha-datos').innerHTML =
+    fi('Corredor', nombre+' '+apellido) + fi('Dorsal','#'+dorsal,'color:#E8002D;font-family:Bebas Neue,sans-serif;font-size:1.2rem') +
+    fi('Categoría',st.dist) + fi('Modalidad',st.modal) + fi('Corral','A — Único') + fi('Talle',talle) +
+    fi('Total pagado','$'+st.total.toLocaleString('es-AR')+' ✓','color:#00E676') + fi('Fecha','18 Jul 2026 · 09:00 hs') +
+    fi('Lugar','Lago de Regatas · Palermo') + fi('Estado','✅ PAGADO','color:#00E676');
+
+  var kitExtra = '';
+  st.addons.forEach(function(a){ kitExtra += '✓ '+a.n+'<br>'; });
+  document.getElementById('kit-list').innerHTML = '✓ Remera técnica Petru\'s RACE 2026<br>✓ Dorsal #'+dorsal+' con chip<br>✓ Medalla finisher<br>✓ Bolsa del corredor<br>'+kitExtra;
+
+  var qrData = "PETRUS RACE 2026|DORSAL:#"+dorsal+"|CORREDOR:"+nombre+" "+apellido+"|CAT:"+st.dist+"|TALLE:"+talle+"|ESTADO:PAGADO|EMAIL:"+email;
+  document.getElementById('qr-code').innerHTML = '';
+  new QRCode(document.getElementById('qr-code'), {text:qrData, width:180, height:180, colorDark:'#000', colorLight:'#fff', correctLevel:QRCode.CorrectLevel.M});
+
+  st.runners.push({dorsal:dorsal, nombre:nombre, apellido:apellido, talle:talle, dist:st.dist});
+  renderRunners();
+
+  for (var i=1; i<=6; i++) { var s=document.getElementById('si'+i); if(s) s.classList.add('done'); }
+  goPanel(6);
+  setTimeout(cargarSheets, 2500);
+  toast('🎉 ¡Inscripción completada!', 'success');
+}
+function fi(lbl,val,style) { return '<div class="ficha-item"><div class="ficha-lbl">'+lbl+'</div><div class="ficha-val"'+(style?' style="'+style+'"':'')+'>'+val+'</div></div>'; }
+
+// ── TABLA INSCRIPTOS ──
+function renderRunners() {
+  var em = document.getElementById('empty-msg');
+  var tw = document.getElementById('tbl-wrap');
+  if (st.runners.length === 0) { em.style.display='block'; tw.style.display='none'; return; }
+  em.style.display='none'; tw.style.display='block';
+  var talles = {XS:0,S:0,M:0,L:0,XL:0,XXL:0};
+  st.runners.forEach(function(r){ if(talles[r.talle]!==undefined) talles[r.talle]++; });
+  var tch = '';
+  ['XS','S','M','L','XL','XXL'].forEach(function(t){ tch+='<span class="tally-chip">'+t+': '+talles[t]+'</span>'; });
+  tch = '<span class="tally-chip" style="font-weight:600;color:#E8002D">' + st.runners.length + ' inscripto' + (st.runners.length!==1?'s':'') + '</span>' + tch;
+  document.getElementById('tally').innerHTML = tch;
+  var rows = '';
+  st.runners.forEach(function(r){
+    rows += '<tr><td style="font-family:Bebas Neue,sans-serif;font-size:1.1rem;color:#E8002D">#'+r.dorsal+'</td><td style="font-weight:500">'+r.nombre+'</td><td>'+r.apellido+'</td><td><span class="talle-badge">'+r.talle+'</span></td><td><span class="cat-badge '+(r.dist==='Kids 500m'?'cat-kids':'cat-3k')+'">'+r.dist+'</span></td></tr>';
+  });
+  document.getElementById('tbl-body').innerHTML = rows;
+}
+
+// ── BOTONES (event listeners al final, cuando el DOM ya cargó) ──
+document.addEventListener('DOMContentLoaded', function() {
+
+  // PASO 1 → 2
+  document.getElementById('btn-paso1').addEventListener('click', function() {
+    var dist = document.querySelector('input[name="distancia"]:checked');
+    var modal = document.querySelector('input[name="modalidad"]:checked');
+    if (!dist) { toast('👆 Elegí una distancia: 3K o Kids 500m', 'error'); return; }
+    if (!modal) { toast('👆 Elegí una modalidad', 'error'); return; }
+    st.dist = dist.value;
+    st.modal = modal.value;
+    st.basePrice = dist.value === '3K' ? 8000 : 3500;
+    st.corral = true;
+    goPanel(2);
+  });
+
+  // PASO 2 → 3
+  document.getElementById('btn-paso2').addEventListener('click', function() {
+    var req = ['f-nombre','f-apellido','f-tipdoc','f-nrodoc','f-sexo','f-talle','f-tel','f-email','f-emnom','f-emtel'];
+    for (var i=0; i<req.length; i++) {
+      if (!document.getElementById(req[i]).value.trim()) { toast('Completá todos los campos obligatorios', 'error'); return; }
+    }
+    goPanel(3);
+  });
+
+  // PASO 3 → 4
+  document.getElementById('btn-paso3').addEventListener('click', function() {
+    goPanel(4);
+    actuResumen();
+  });
+
+  // PASO 4 → 5
+  document.getElementById('btn-paso4').addEventListener('click', function() {
+    goPanel(5);
+    actuPayResumen();
+  });
+
+  // BACKS
+  document.getElementById('btn-back2').addEventListener('click', function(){ goPanel(1); });
+  document.getElementById('btn-back3').addEventListener('click', function(){ goPanel(2); });
+  document.getElementById('btn-back4').addEventListener('click', function(){ goPanel(3); });
+  document.getElementById('btn-back5').addEventListener('click', function(){ goPanel(4); });
+
+  // PAGAR
+  document.getElementById('btn-pagar').addEventListener('click', function() {
+    if (!document.getElementById('chk1').classList.contains('on') ||
+        !document.getElementById('chk2').classList.contains('on') ||
+        !document.getElementById('chk3').classList.contains('on')) {
+      toast('Debés aceptar los términos obligatorios', 'error'); return;
+    }
+    if (st.payMethod === 'tarjeta') {
+      if (!document.getElementById('card-num').value || !document.getElementById('card-name').value ||
+          !document.getElementById('card-exp').value || !document.getElementById('card-cvv').value) {
+        toast('Completá los datos de la tarjeta', 'error'); return;
+      }
+    }
+    var btn = document.getElementById('btn-pagar');
+    btn.textContent = '⏳ Procesando...';
+    btn.disabled = true;
+    setTimeout(function(){ mostrarConfirm(); }, 2200);
+  });
+
+  // HERO CTA
+  document.querySelector('.btn-hero').addEventListener('click', function() {
+    document.getElementById('registro').scrollIntoView({behavior:'smooth'});
+  });
+
+  // Pay inicial
+  selPay('tarjeta');
+});
+</script>
+</body>
+</html>
